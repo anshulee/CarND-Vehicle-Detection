@@ -38,26 +38,23 @@ You're reading it!
 
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
-The code for this step is contained in the first code cell of the IPython notebook (or in lines # through # of the file called `some_file.py`).  
-
-I started by reading in all the `vehicle` and `non-vehicle` images.  Here is an example of one of each of the `vehicle` and `non-vehicle` classes:
-
-![alt text][image1]
-
-I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
-
-Here is an example using the `YCrCb` color space and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+All code for this project is in "vehicle_detection.ipynb". The code for this is in the function get_hog_features(). I first loaded up the training set for car and non-car images . Visualization for the same is as below
+<TODO> put image
+Then put few of the test images  through the hog function to see the output
+<TODO> put image
+I then used a function called "extract_features" to accept a array of images and HOGParameters to produce a flattened array of hog features for each image in the array
 
 
-![alt text][image2]
+I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the test classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
+
 
 ####2. Explain how you settled on your final choice of HOG parameters.
 
-I tried various combinations of parameters and...
+I decided  based upon the performance of the SVM classifier produced using them.I considered the accuracy as well as the speed with which classifier is able to make predictions. There is a balance to be struck between accuracy and speed of the classifier, and inorder to do more real time predictions i favored speed and then would try and strenthen the accuracy if i saw an issue.
 
 ####3. Describe how (and identify where in your code) you trained a classifier using your selected HOG features (and color features if you used them).
 
-I trained a linear SVM using...
+In the section titled "Train a Classifier" I trained a linear SVM with the default classifier parameters and using HOG features alone and was able to achieve a test accuracy of 98.17%. 
 
 ###Sliding Window Search
 
