@@ -15,13 +15,13 @@ The goals / steps of this project are the following:
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
-[image1]: ./examples/car_not_car.png
-[image2]: ./examples/HOG_example.jpg
-[image3]: ./examples/sliding_windows.jpg
-[image4]: ./examples/sliding_window.jpg
-[image5]: ./examples/bboxes_and_heat.png
-[image6]: ./examples/labels_map.png
-[image7]: ./examples/output_bboxes.png
+[image1]: ./examples/Data.png
+[image2]: ./examples/hog.jpg
+[image3]: ./examples/detection.jpg
+[image4]: ./examples/final.jpg
+[image5]: ./examples/finaldetection.png
+[image6]: ./examples/heatmap.png
+[image7]: ./examples/pipelineimages.png
 [video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -40,11 +40,11 @@ You're reading it!
 
 All code for this project is in "vehicle_detection.ipynb". The code for this is in the function get_hog_features(). I first loaded up the training set for car and non-car images . Visualization for the same is as below
 
-TODO: put image
+![alt text][image1]
 
 Then put few of the test images  through the hog function to see the output
 
-TODO put image
+![alt text][image2]
 
 I then used a function called "extract_features" to accept a array of images and HOGParameters to produce a flattened array of hog features for each image in the array
 
@@ -69,24 +69,30 @@ The method performs the classifier prediction on the HOG features for each windo
 
 Example:-
 
-TODO:- Image 
+![alt text][image3]
 I explored several configurations of window sizes and positions, with various overlaps in the X and Y directions. The method getRectangles() was evolved after multiple trials to get the right coordinates when testing with the pipeline images
 
-TODO:- Image 
+![alt text][image5]
 
-I then used the heatmap function to remove false detections and multiple detections.
+I then used the heatmap function with thresholding to remove false detections and multiple detections.
+
+![alt text][image6]
+
+Final detection looked like this
+
+![alt text][image5]
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
 Below image shows the pipeline images.
 
-TODO 
+![alt text][image7] 
 
 I tried various combinations of colorspace/channel as well as parameters. Increasing the pixels_per_cell parameter increased the speed by quite a bit with little cost to accurary
 
 Detection accurary was increased by changes to window sizing and overlap as described above, and lowering the heatmap threshold to improve accuracy of the detection (higher threshold values tended to underestimate the size of the vehicle).
 
-![alt text][image4]
+
 ---
 
 ### Video Implementation
