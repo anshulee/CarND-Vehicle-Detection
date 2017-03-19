@@ -22,6 +22,7 @@ The goals / steps of this project are the following:
 [image5]: ./examples/finaldetection.png
 [image6]: ./examples/heatmap.png
 [image7]: ./examples/pipelineimages.png
+[image8]: ./examples/multiple.png
 [video1]: ./project_video.mp4
 
 ## [Rubric](https://review.udacity.com/#!/rubrics/513/view) Points
@@ -70,9 +71,10 @@ The method performs the classifier prediction on the HOG features for each windo
 Example:-
 
 ![alt text][image3]
+
 I explored several configurations of window sizes and positions, with various overlaps in the X and Y directions. The method getRectangles() was evolved after multiple trials to get the right coordinates when testing with the pipeline images
 
-![alt text][image5]
+![alt text][image8]
 
 I then used the heatmap function with thresholding to remove false detections and multiple detections.
 
