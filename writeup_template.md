@@ -94,6 +94,8 @@ I tried various combinations of colorspace/channel as well as parameters. Increa
 
 Detection accurary was increased by changes to window sizing and overlap as described above, and lowering the heatmap threshold to improve accuracy of the detection (higher threshold values tended to underestimate the size of the vehicle).
 
+Although this works well on the pipeline images it does show some false detections on the final video frame...
+
 
 ---
 
@@ -112,4 +114,4 @@ The code for processing frames of video is contained in the function titled "Pro
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-I had some trouble figuring out the appropriate coordinates for the rectangles to be used and that took quite a lot of trials. I think this pipeline will fail if cars are different from the test set...also we haven't catered for car coming from wrong direction.
+I had some trouble figuring out the appropriate coordinates for the rectangles to be used and that took quite a lot of trials. I think this pipeline will fail if cars are different from the test set...also we haven't catered for car coming from wrong direction. The pipeline is also showing some false detections specially on the other side of the railing. I think if i tweak the rectangle boundaries a little more this issue would go away...
