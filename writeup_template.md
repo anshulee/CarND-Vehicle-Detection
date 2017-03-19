@@ -16,9 +16,9 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 [image1]: ./examples/Data.png
-[image2]: ./examples/hog.jpg
-[image3]: ./examples/detection.jpg
-[image4]: ./examples/final.jpg
+[image2]: ./examples/hog.png
+[image3]: ./examples/search.png
+[image4]: ./examples/final.png
 [image5]: ./examples/finaldetection.png
 [image6]: ./examples/heatmap.png
 [image7]: ./examples/pipelineimages.png
