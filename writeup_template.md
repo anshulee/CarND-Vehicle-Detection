@@ -39,9 +39,13 @@ You're reading it!
 ####1. Explain how (and identify where in your code) you extracted HOG features from the training images.
 
 All code for this project is in "vehicle_detection.ipynb". The code for this is in the function get_hog_features(). I first loaded up the training set for car and non-car images . Visualization for the same is as below
-<TODO> put image
+
+TODO: put image
+
 Then put few of the test images  through the hog function to see the output
-<TODO> put image
+
+TODO put image
+
 I then used a function called "extract_features" to accept a array of images and HOGParameters to produce a flattened array of hog features for each image in the array
 
 
@@ -60,13 +64,27 @@ In the section titled "Train a Classifier" I trained a linear SVM with the defau
 
 ####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
+I used the find_cars() method from the lesson code and modified it to use HOGFeatures over a subsection of the image and then subsampled.
+The method performs the classifier prediction on the HOG features for each window region and returns a list of rectangle objects corresponding to the windows that generated a positive ("car") prediction.
 
-![alt text][image3]
+Example:-
+
+TODO:- Image 
+I explored several configurations of window sizes and positions, with various overlaps in the X and Y directions. The method getRectangles() was evolved after multiple trials to get the right coordinates when testing with the pipeline images
+
+TODO:- Image 
+
+I then used the heatmap function to remove false detections and multiple detections.
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Below image shows the pipeline images.
+
+TODO 
+
+I tried various combinations of colorspace/channel as well as parameters. Increasing the pixels_per_cell parameter increased the speed by quite a bit with little cost to accurary
+
+Detection accurary was increased by changes to window sizing and overlap as described above, and lowering the heatmap threshold to improve accuracy of the detection (higher threshold values tended to underestimate the size of the vehicle).
 
 ![alt text][image4]
 ---
@@ -79,27 +97,11 @@ Here's a [link to my video result](./project_video.mp4)
 
 ####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+The code for processing frames of video is contained in the function titled "Process_frame_with_history" and is identical to the code for processing a single image described above, with the exception of storing the detections (returned by find_cars) from the previous 10 frames of video using the prev_rects parameter from a class called Vehicle_Storage. Rather than performing the heatmap/threshold/label steps for the current frame's detections, the detections for the past 10 frames are combined and added to the heatmap and the threshold for the heatmap is set to 1 + len(det.prev_rects)//2 (one more than half the number of rectangle sets contained in the history)
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
-
-### Here are six frames and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
-
-
-
----
 
 ###Discussion
 
 ####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
-
+I had some trouble figuring out the appropriate coordinates for the rectangles to be used and that took quite a lot of trials. I think this pipeline will fail if cars are different from the test set...also we haven't catered for car coming from wrong direction.
